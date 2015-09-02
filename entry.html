@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="header">
+		<div class="top-bar">
+			<div class="top-bar-inner">
+				<span class="top-bar-welcome">Welcome to Cooka</span>
+
+				<ul class="top-bar-links">
+					<li>
+						<a href="#">
+							<span class="icon-user"></span>
+							Sign In
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="icon-register"></span>
+							Sign Up
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="icon-star"></span>
+							Favorites
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="icon-phone"></span>
+							Customer Service
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="header-inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="logo">
+							<span>COOKA</span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="search-input">
+							<form action="">
+								<div class="input-group">
+									<span class="input-group-addon">
+										<select class="">
+											<option value="">Option One</option>
+											<option value="">Option Two</option>
+											<option value="">Option Three</option>
+										</select>
+									</span>
+									<input type="text" class="form-control" name="q">
+									<span class="input-group-btn">
+										<button class="btn btn-primary" type="submit"> <i class="fa fa-search"></i>
+											Search
+										</button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="header-btns">
+							<a href="#" class="header-btns-item">
+								<span class="header-btns-icon header-btns-icon-cart"></span>
+								<span class="header-btns-text">Cart</span>
+							</a>
+							<a href="#" class="header-btns-item">
+								<span class="header-btns-icon header-btns-icon-search"></span>
+								<span class="header-btns-text">Search</span>
+							</a>
+							<a href="#" class="header-btns-item">
+								<span class="header-btns-icon header-btns-icon-help"></span>
+								<span class="header-btns-text">Help</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="header-nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="category-all">
+							<a href="#">
+								<span class="icon-menu"></span>
+								All Category
+							</a>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<ul class="header-nav-items">
+							<li>
+								<a href="#">Brands</a>
+							</li>
+							<li>
+								<a href="#">Made in China</a>
+							</li>
+							<li>
+								<a href="#">Somthing Else</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h1>webpack load test CKF</h1>
+
+	<div class="search-box" data-j="searchBox">
+		<input type="text" class="search-box-input">
+		<button type="button" class="search-box-btn">search</button>
+	</div>
+	<div class="search-box" data-j="searchBox">
+		<input type="text" class="search-box-input">
+		<button type="button" class="search-box-btn">search</button>
+	</div>
+
+	<div class="result-panel" data-j="resultPanel">click search to perform search</div>
+
+	<script src="js/ckLoadScript.js"></script>
+	<script>ckLoadScript('entry');</script>
+</body>
+</html>

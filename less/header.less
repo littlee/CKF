@@ -1,0 +1,76 @@
+@import "public.less";
+// header
+.header {
+    &-inner {
+        background-color: @ck-sub;
+        padding: 20px 0;
+    }
+
+    &-btns {
+        text-align: center;
+
+        &-item {
+            display: inline-block;
+            color: #fff;
+            margin: 0 10px;
+
+            &:hover {
+                text-decoration: none;
+                color: #eee;
+            }
+        }
+
+        &-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            background-image: url(../images/header_btns.png);
+            background-position: 0 0;
+
+            &-cart {
+                background-position: 0 0;
+            }
+
+            &-search {
+                background-position: -40px 0;
+            }
+
+            &-help {
+                background-position: -80px 0;
+            }
+        }
+
+        &-text {
+            display: block;
+            margin-top: -5px;
+        }
+    }
+
+    &-nav {
+        background-color: #fff;
+        // border-bottom: 1px solid @ck-sub;
+
+        &-items {
+            margin: 0;
+            padding: 0;
+
+            li {
+                list-style-type: none;
+                display: block;
+                float: left;
+                padding: 5px 10px;
+            }
+
+            li + li {
+                border-left: 1px solid #ccc;
+            }
+
+            a {
+                display: block;
+                color: #333;
+            }
+        }
+    }
+}

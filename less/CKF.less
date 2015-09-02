@@ -1,0 +1,187 @@
+@import "public.less";
+// fonts
+@font-face {
+    font-family: 'proxima_nova_rgregular';
+    src: url('../fonts/proximanova-regular-webfont.eot');
+    src: url('../fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/proximanova-regular-webfont.woff2') format('woff2'), url('../fonts/proximanova-regular-webfont.woff') format('woff'), url('../fonts/proximanova-regular-webfont.ttf') format('truetype'), url('../fonts/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// global style
+body {
+    font-family: 'proxima_nova_rgregular', 'Microsoft Yahei', Helvetica, Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+//fix customize or global change of bootstrap
+.form-horizontal .control-label {
+    padding-right: 5px;
+}
+
+.btn-secondary {
+    color: #ffffff;
+    background-color: @ck-sub;
+    border-color: darken(@ck-sub, 5%);
+}
+
+.btn-secondary:focus,
+.btn-secondary.focus {
+    color: #ffffff;
+    background-color: darken(@ck-sub, 10%);
+    border-color: darken(@ck-sub, 20%);
+}
+
+.btn-secondary:hover {
+    color: #ffffff;
+    background-color: darken(@ck-sub, 10%);
+    border-color: darken(@ck-sub, 20%);
+}
+
+.btn-secondary:active,
+.btn-secondary.active,
+.open > .dropdown-toggle.btn-secondary {
+    color: #ffffff;
+    background-color: darken(@ck-sub, 10%);
+    border-color: darken(@ck-sub, 20%);
+}
+
+.btn-secondary:active:hover,
+.btn-secondary.active:hover,
+.open > .dropdown-toggle.btn-secondary:hover,
+.btn-secondary:active:focus,
+.btn-secondary.active:focus,
+.open > .dropdown-toggle.btn-secondary:focus,
+.btn-secondary:active.focus,
+.btn-secondary.active.focus,
+.open > .dropdown-toggle.btn-secondary.focus {
+    color: #ffffff;
+    background-color: darken(@ck-sub, 10%);
+    border-color: darken(@ck-sub, 20%);
+}
+
+.btn-secondary:active,
+.btn-secondary.active,
+.open > .dropdown-toggle.btn-secondary {
+    background-image: none;
+}
+
+.btn-secondary.disabled,
+.btn-secondary[disabled],
+fieldset[disabled] .btn-secondary,
+.btn-secondary.disabled:hover,
+.btn-secondary[disabled]:hover,
+fieldset[disabled] .btn-secondary:hover,
+.btn-secondary.disabled:focus,
+.btn-secondary[disabled]:focus,
+fieldset[disabled] .btn-secondary:focus,
+.btn-secondary.disabled.focus,
+.btn-secondary[disabled].focus,
+fieldset[disabled] .btn-secondary.focus,
+.btn-secondary.disabled:active,
+.btn-secondary[disabled]:active,
+fieldset[disabled] .btn-secondary:active,
+.btn-secondary.disabled.active,
+.btn-secondary[disabled].active,
+fieldset[disabled] .btn-secondary.active {
+    background-color: @ck-sub;
+    border-color: darken(@ck-sub, 5%);
+}
+
+.btn-secondary .badge {
+    color: @ck-sub;
+    background-color: #ffffff;
+}
+
+.btn-round {
+    border-radius: 3px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid @ck-main;
+}
+
+.nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+.nav-tabs > li > a {
+    color: #666;
+    margin-right: 0;
+    line-height: 1.42857143;
+    border: 1px solid #ddd;
+    border-bottom-color: @ck-main;
+    border-radius: 0 0 0 0;
+}
+
+.nav-tabs > li > a:hover {
+    border-color: #ddd;
+    border-bottom-color: @ck-main;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    color: #fff;
+    background-color: @ck-main;
+    border: 1px solid @ck-main;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+
+.nav-tabs.nav-justified {
+    width: 100%;
+    border-bottom: 0;
+}
+
+.nav-tabs.nav-justified > li {
+    float: none;
+}
+
+.nav-tabs.nav-justified > li > a {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.nav-tabs.nav-justified > .dropdown .dropdown-menu {
+    top: auto;
+    left: auto;
+}
+
+@media (min-width:768px) {
+    .nav-tabs.nav-justified > li {
+        display: table-cell;
+        width: 1%;
+    }
+
+    .nav-tabs.nav-justified > li > a {
+        margin-bottom: 0;
+    }
+
+}
+
+.nav-tabs.nav-justified > li > a {
+    margin-right: 0;
+    border-radius: 0;
+}
+
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+    border: 1px solid #dddddd;
+}
+
+@media (min-width:768px) {
+    .nav-tabs.nav-justified > li > a {
+        border-bottom: 1px solid #dddddd;
+        border-radius: 0 0 0 0;
+    }
+
+    .nav-tabs.nav-justified > .active > a,
+    .nav-tabs.nav-justified > .active > a:hover,
+    .nav-tabs.nav-justified > .active > a:focus {
+        border-bottom-color: #ffffff;
+    }
+
+}

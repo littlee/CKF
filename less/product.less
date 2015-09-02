@@ -1,0 +1,83 @@
+@import "public.less";
+
+// product
+.product {
+    position:  relative;
+
+    &:hover {
+        // border: 1px solid #ddd;
+        z-index: 99;
+        box-shadow: 0 0 10px #ddd;
+    }
+
+    > a {
+        display: block;
+    }
+
+    &-img {
+        display: block;
+        width: 100%;
+    }
+
+    &-info {
+        padding: 5px;
+        width: 50%;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background-color: #fff; // fallback
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    &-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &-rate {
+        &-star {
+            float: left;
+            color: @ck-main;
+
+            & + & {
+                margin-left: 3px;
+            }
+
+            &.active ~ & {
+                color: #999;
+            }
+        }
+    }
+}
+
+.product-may-like {
+    .product-info {
+        padding: 5px;
+        width: 100%;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background-color: #fff; // fallback
+        background-color: rgba(255, 255, 255, 0.8);
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            display: block;
+            border-width: 10px;
+            border-style: solid;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-top-color: transparent;
+            border-bottom-color: #fff;
+            border-bottom-color: rgba(255, 255, 255, 0.8);
+            top: -20px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+    }
+}
