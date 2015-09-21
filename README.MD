@@ -1,238 +1,88 @@
 # CKF (not KFC)
 
-## 模块创建
-### html
-使用 `data-j="*"` 启用相应的 js 代码
-```html
-<!-- html code -->
-<div class="search-box" data-j="searchBox">
-	<input type="text" class="search-box-input">
-	<button type="button" class="search-box-btn">search</button>
-</div>
-```
-
-### less [search-box.less]
-following the SMACSS guideline
-```less
-@import "public.less";
-
-.search-box {
-	
-	&-input {
-		width: 300px;
-		height: 50px;
-		font-size: 40px;
-		background-color: @ck-main;
-	}
-
-	&-btn {
-		width: 150px;
-		height: 50px;
-		font-size: 40px;
-	}
-}
-```
-
-### js [searchBox.js]
-使用 CommonJS 定义一个模块，所有的模块的依赖 CKF
-这样的好处在于，模块可以声明依赖
-使用 `CKF.create([String: module_name])` 创建并向核心注册一个模块
+## API
+### CKF.create
 ```js
-var CKF = require('./CKF.js');
-require('../less/search-box.less');
-// other dependencies ...
-
-module.exports = (function () {
-	var moduleName = 'searchBox';
-	var module = CKF.create(moduleName);
-
-	var input = module.find('.search-box-input');
-	var button = module.find('.search-box-btn');
-
-	function handleSearch() {
-		var query = input.val();
-		if (query) {
-			CKF.notify({
-				type: 'perform-search',
-				data: query
-			});
-		}
-	}
-
-	return {
-		init: function () {
-			button.on('click', handleSearch);
-		}
-	};
-})();
+CKF.create(moduleID, optional)
 ```
-**如果模块在页面中出现多次**
+创建一个模块并向 CKF 注册，返回 jQuery 对象。
+
+* 参数：
+    * (String) moduleID 模块名称
+    * (Boolean) optional 是否 data-j 可选
+* 返回值：
+    * (jQuery) `$('[data-j="moduleID"]')` 的 jQuery 对象
+
+> 如果 optional 为 true，则可以不在 DOM 中设置 data-j 属性，以不启用模块的 js 功能。
+
+### CKF.rebuild
 ```js
-var CKF = require('./CKF.js');
-require('../less/search-box.less');
-// other dependencies ...
-
-module.exports = (function () {
-	var moduleName = 'searchBox';
-	var module = CKF.create(moduleName);
-
-	
-
-	function handleSearch(query) {
-		if (query) {
-			CKF.notify({
-				type: 'perform-search',
-				data: query
-			});
-		}
-	}
-
-	return {
-		init: function () {
-			module.each(function (index, elem) {
-				var $elem = $(elem);
-				var input = $elem.find('.search-box-input');
-				var button = $elem.find('.search-box-btn');
-				button.on('click', function () {
-					handleSearch(input.val());
-				});
-			});
-		}
-	};
-})();
+CKF.rebuild(moduleID)
 ```
+重新获取模块最新的 DOM 元素，返回 jQuery 对象。
 
-## 模块交流
-定义另外一个模块
-```html
-<div class="result-panel" data-j="resultPanel">
-	click search to perform search
-</div>
-```
-```less
-@import "public.less";
+* 参数：
+    * (String) moduleID 模块名称
+* 返回值：
+    * (jQuery) `$('[data-j="moduleID"]')` 的 jQuery 对象
 
-.result-panel {
-	margin-top: 30px;
-	font-size: 50px;
-}
-```
+> 由于 jQuery 对象不是随着 DOM 的改变而实时更新，当需要从 DOM 中获取最新的模块元素时，使用本方法。使用 create 创建过的模块才能使用此方法。
+
+### CKF.destory
 ```js
-var CKF = require('./CKF.js');
-require('../less/result-panel.less');
-// other dependencies ...
-
-module.exports = (function () {
-	var moduleName = 'resultPanel';
-
-	var module = CKF.create(moduleName);
-
-	function showResult(query) {
-		module.html('Your query:' + query);
-	}
-
-	return {
-		init: function () {
-			CKF.listen({
-				'perform-search': showResult
-			}, moduleName);
-		}
-	};
-})();
+CKF.destory(moduleID)
 ```
-模块通过 `CKF.notify()` 向全局事件系统触发事件和发送数据
-模块通过 `CKF.listen()` 从全局事件系统相应事件和处理数据
+销毁一个模块，抹除该模块所有的全局事件系统数据。
 
-### webpack 的 enrty point
+* 参数：
+    * (String) moduleID 模块名称
+* 返回值：
+    * (Boolean) 销毁成功或失败
+
+### CKF.notify
 ```js
-require('../css/bootstrap.css');
-require('../css/icons.css');
-
-var header = require('./p_header.js');
-var footer = require('./p_footer.js');
-var topBar = require('./p_topBar.js');
-var logo = require('./p_logo.js');
-var ajaxLoading = require('./p_ajaxLoading.js');
-var category = require('./p_category.js');
-
-var searchInput = require('./p_searchInput.js');
-var searchBox = require('./p_searchBox.js');
-var resultPanel = require('./p_resultPanel.js');
-
-$(document).ready(function () {
-	header.init();
-	footer.init();
-	topBar.init();
-	logo.init();
-	ajaxLoading.init();
-	category.init();
-	searchInput.init();
-	searchBox.init();
-	resultPanel.init();
+CKF.notify({
+    type: 'event-type',
+    data: eventData
 });
 ```
+向全局事件系统发送事件。
 
-## 模块总结
+* 参数：
+    * (Object) event 事件对象：
+        * (String) type 事件名称
+        * (Object || Array || String || Number || Boolean || null) data 事件数据
+* 返回值：
+    * 无
+
+> 所有通过 listen 注册对应的事件处理函数会执行，且可以从函数参数中获取事件数据。
+
+### CKF.listen
 ```js
-var CKF = require('./CKF.js');
-require('../less/module-name.less');
-
-module.exports = (function () {
-	// 私有变量或函数
-	var myPrivate = 'private';
-	function privateFunction() {
-		console.log('private function');
-	}
-
-	// 模块 API
-	return {
-		init: function () {
-
-		},
-		destroy: function () {
-
-		}
-	};
-})();
+CKF.listen({
+    'event-type1': handler1, 
+    'event-type2': handler2 
+    // ...
+}, moduleName);
 ```
-模块返回的 API 至少包含一个函数 init
-init 要做的事：
+向全局事件系统注册事件处理函数
 
-* 事件绑定
-* 监听全局事件
+* 参数：
+    * (Object) event 事件对象：
+        * (String) type 事件名称 : (Function) handler 事件处理函数
+* 返回值：
+    * 无
 
+> 监听来自全局事件系统的事件，可以一次指派多个事件。
 
-# CKF API
-
-## CKF.create(moduleName)
-创建一个模块
-
-* String: moduleName 模块名称
-
-## CKF.notify(event, moduleName)
-向全局事件系统触发事件
-
-* Object: event 事件对象
-	* String: type 事件类型
-	* Object || Array || String || Number || Boolean || null: data 事件数据
-* String: moduleName 模块名称（事件触发者）
-
-## CKF.listen(handlers)
-响应全局事件系统事件
-
-* Object: handlers 事件响应对象
-	* 事件类型作为键
-	* 处理函数作为值
-	* 可以有多个键值对
-
-# 命名约定
-**html:**
-```html
-	<div data-j="moduleName"></div>
+### CKF.ignore
+```js
+CKF.ignore(['event-type1', 'event-type2'/*, ...*/], moduleName);
 ```
+取消模块在全局事件系统的事件处理函数
 
-**less:**
-module-name.less
-
-**js:**
-p_moduleName.js
+* 参数：
+    * (Array) events 事件名称
+    * (String) moduleName 模块名称
+* 返回值：
+    * 无
