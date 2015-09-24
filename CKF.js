@@ -1,21 +1,6 @@
 require('../less/CKF.less');
 require('expose?jQuery!jquery');
 
-// CSRF lin shi dai ma
-(function($) {
-	$.ajaxSetup({
-		beforeSend: function(request) {
-			request.setRequestHeader('__RequestVerificationToken', $('input[name="xToken"]').eq(0).val());
-		},
-		complete: function(XHR, textStatus) {
-			if (parseInt(XHR.status) === 401) {
-				alert(__('You should sign in first'));
-				window.location.reload();
-			}
-		}
-	});
-})(jQuery);
-
 var CKF = (function() {
 	// var debug = true;
 	var debug = false;
