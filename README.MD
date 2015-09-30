@@ -1,5 +1,7 @@
 # CKF (not KFC)
 
+Front End Framework for cookabuy.com
+
 ## API
 ### CKF.create
 ```js
